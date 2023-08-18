@@ -2,6 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Build') {
+            when {
+                changeset "api/**"
+            }
             steps{
                 sh '''
                     #!/bin/bash
@@ -14,6 +17,26 @@ pipeline {
 
                     ./demo    
                 '''
+            }
+        }
+        stage('Parallel Stage') {
+            when {
+                changeset "api/**"
+            }
+            failFast true
+            parallel {
+                stage('cloud provider') {
+                    stages {
+                            stage('trigger local') {
+                                build job: 'ksctl (local)'
+                            }
+                            stage('Nested 2') {
+                            steps {
+                                echo "In stage Nested 2 within Branch C"
+                            }
+                        }
+                    }
+                }
             }
         }
     }
