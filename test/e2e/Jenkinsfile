@@ -29,7 +29,7 @@ pipeline {
                     stages {
                             stage('trigger local') {
                                 steps {
-                                    build job: 'ksctl (local)'
+                                    build job: 'local-demodemo'
                                 }
                             }
                             stage('Nested 2') {
