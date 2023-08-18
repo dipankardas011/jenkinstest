@@ -28,7 +28,9 @@ pipeline {
                 stage('cloud provider') {
                     stages {
                             stage('trigger local') {
-                                build job: 'ksctl (local)'
+                                steps {
+                                    build job: 'ksctl (local)'
+                                }
                             }
                             stage('Nested 2') {
                             steps {
