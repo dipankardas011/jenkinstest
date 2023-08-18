@@ -29,7 +29,7 @@ pipeline {
                     stages {
                             stage('trigger local') {
                                 steps {
-                                    build job: 'local-demodemo'
+                                    build job: 'local-demodemo', parameters: [string(name: 'GIT_BRANCH', value: "${env.GIT_BRANCH}")]
                                 }
                             }
                             stage('Nested 2') {
