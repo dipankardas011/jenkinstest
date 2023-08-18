@@ -21,17 +21,14 @@ pipeline {
         }
         stage('Parallel Stage') {
             when {
-                branch 'main'
                 changeset "api/**"
             }
             failFast true
             parallel {
-                stage('providers') {
+                stage('cloud provider') {
                     stages {
-                            stage('Nested 1') {
-                                steps {
-                                    echo "In stage Nested 1 within Branch C"
-                                }
+                            stage('trigger local') {
+                                build job: 'ksctl (local)'
                             }
                             stage('Nested 2') {
                             steps {
