@@ -1,6 +1,9 @@
 pipeline {
     agent any
     stages {
+        when {
+            changeset "api/**"
+        }
         stage('Build') {
             steps{
                 sh '''
