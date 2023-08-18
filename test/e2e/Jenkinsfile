@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps{
+                sh '''
+                    #!/bin/bash
+
+                    export PATH="$PATH:/usr/local/go/bin"
+
+                    go version
+
+                    go build -o demo .
+
+                    ./demo    
+                '''
+            }
+        }
+    }
+}
